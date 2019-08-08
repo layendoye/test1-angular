@@ -1,0 +1,4 @@
+Dans :
+- angular.json ligne 31 j'ai ajouter le bootstrap
+- app.modules.ts j ai ajouter import { FormsModule } from '@angular/forms'; et ligne 15 dans import j ai ajouter FormsModule
+https://www.youtube.com/watch?v=TBjzZw9WuJs&list=PLxhnp_qsD8EOjadg0gWeorq8n3fYJuhrA&index=5 (9:01)
