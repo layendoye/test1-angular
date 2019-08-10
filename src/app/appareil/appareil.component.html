@@ -13,6 +13,7 @@
     <button class="btn btn-danger" (click)="onSwitchOff()" [disabled]="appareilStatus=='éteint'">Eteindre</button>
 </li>
 <!--
+    Pour creer un component : ng g c appareil
     [(ngModel)]="appareilName" permet de lier le nom de l'appareil avec l'input text
     avant d'utiliser ngModel importer d abord FormsModule dans app.module.ts
     on met la classe 'list-group-item-success' si appareilStatus=='allumé'
