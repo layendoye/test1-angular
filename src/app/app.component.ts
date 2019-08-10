@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AppareilService } from './services/appareil.service';
 
 @Component({
   selector: 'app-root',
@@ -8,6 +9,7 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'Mon titre';
   isAuth=false;
+  lastUpdate=new Date();
   appareils=[
     {
       name:"Machine à laver",
@@ -23,7 +25,7 @@ export class AppComponent {
     }
   ];
   
-  constructor(){
+  constructor(private appareilService: AppareilService){// je l'ai mis dans app.module.ts
     setTimeout(
       ()=>{
         this.isAuth=true;
