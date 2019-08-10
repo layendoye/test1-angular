@@ -1,9 +1,19 @@
 <li [ngClass]="{
                 'list-group-item': true,
-                'list-group-item-success': appareilStatus=='allumer',
-                'list-group-item-danger': appareilStatus=='éteint'}">
+                 'list-group-item-success': appareilStatus=='allumé', 
+                'list-group-item-danger': appareilStatus=='éteint'
+                }">
+
     <div style="width:20px;height:20px;background-color:red;" *ngIf="appareilStatus=='éteint'"></div>
+
     <h4 [ngStyle]="{color: getColor()}">Appareil : {{ appareilName }} -- Status : {{ getStatus() }} </h4>
+
     <input type="text" class="form-control" [(ngModel)]="appareilName">
-    <!--pour utiliser ngModel importer d abord FormsModule dans app.module.ts-->
+    <button class="btn btn-success" (click)="onSwitchOn()" [disabled]="appareilStatus=='allumé'">Allumer</button>
+    <button class="btn btn-danger" (click)="onSwitchOff()" [disabled]="appareilStatus=='éteint'">Eteindre</button>
 </li>
+<!--
+    [(ngModel)]="appareilName" permet de lier le nom de l'appareil avec l'input text
+    avant d'utiliser ngModel importer d abord FormsModule dans app.module.ts
+    on met la classe 'list-group-item-success' si appareilStatus=='allumé'
+-->
