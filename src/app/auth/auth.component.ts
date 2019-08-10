@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from './services/auth.service';
+import { AuthService } from '../services/auth.service';
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
@@ -10,10 +10,10 @@ export class AuthComponent implements OnInit {
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
-    authStatus=this.authService.isAuth;
+    this.authStatus=this.authService.isAuth;
   }
   onSignIn(){
-    this.authService.signIn().then(
+    this.authService.singIn().then(
       ()=>{
         alert('Connexion réussie');
         this.authStatus= this.authService.isAuth;
@@ -22,7 +22,7 @@ export class AuthComponent implements OnInit {
   }
 
   onSignOUT(){
-    this.authService.signOut(); 
+    this.authService.singOut(); 
     this.authStatus= this.authService.isAuth;
   }
 
