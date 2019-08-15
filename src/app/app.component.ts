@@ -14,12 +14,12 @@ export class AppComponent implements OnInit, OnDestroy{
   counterSubscription: Subscription;
   constructor(){}
   ngOnInit(){
-    const counter=Observable.interval(1000);
-    this.counterSubscription=counter.subscribe(//subscribe permet d observer une observable
-      (value: number)=>{
-        this.secondes=value;
-      }
-    );
+    // const counter=Observable.interval(1000);
+    // this.counterSubscription=counter.subscribe(//subscribe permet d observer une observable
+    //   (value: number)=>{
+    //     this.secondes=value;
+    //   }
+    // );
   }
   ngOnDestroy(){
     this.counterSubscription.unsubscribe();
