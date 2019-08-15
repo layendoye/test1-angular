@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
@@ -7,22 +8,22 @@ import { AuthService } from '../services/auth.service';
 })
 export class AuthComponent implements OnInit {
   authStatus: boolean;
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
     this.authStatus=this.authService.isAuth;
   }
   onSignIn(){
-    this.authService.singIn().then(
+    this.authService.signIn().then(
       ()=>{
-        alert('Connexion réussie');
         this.authStatus= this.authService.isAuth;
+        this.router.navigate(['appareils']);//la route appareil definie dans app.module.ts
       }
     );//then pour attendre la fin car c est une methode asynchrone
   }
 
-  onSignOUT(){
-    this.authService.singOut(); 
+  onSignOut(){
+    this.authService.signOut(); 
     this.authStatus= this.authService.isAuth;
   }
 

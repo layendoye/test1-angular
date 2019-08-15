@@ -4,7 +4,7 @@ import { reject } from "q";
 export class AuthService{
     isAuth=false;
 
-    singIn(){
+    signIn(){
         return new Promise(
             (resolve,reject)=>{
                 setTimeout(
@@ -16,7 +16,7 @@ export class AuthService{
             }
         )
     }
-    singOut(){
+    signOut(){
         this.isAuth=false;
     }
 

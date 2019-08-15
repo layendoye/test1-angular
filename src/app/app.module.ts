@@ -12,18 +12,24 @@ import { AuthComponent } from './auth/auth.component';
 import { AppareilViewComponent } from './appareil-view/appareil-view.component';
 import { Routes } from '@angular/router';
 import { AuthService } from './services/auth.service';
-
+import { SingleAppareilComponent } from './single-appareil/single-appareil.component';
+import { FourOhFourComponent } from './four-oh-four/four-oh-four.component';
+import { AuthGuard } from './services/auth-guard.service';
 const appRoutes: Routes=[
-  { path: 'appareils', component: AppareilViewComponent },
+  { path: 'appareils', canActivate: [AuthGuard] ,component: AppareilViewComponent }, //canActivate: [AuthGuard] permet de proteger la route ne pas oublier de le mettre dans les provider le chercher dans les services
+  { path: 'appareils/:id', canActivate: [AuthGuard], component: SingleAppareilComponent},
   { path: 'auth', component: AuthComponent },
-  { path: '', component: AppareilViewComponent }
+  { path: '', component: AppareilViewComponent },
+
+  { path: 'not-found', component:FourOhFourComponent},
+  { path: '**', redirectTo: '/not-found'} //toujour le mettre à la fin angular cherche les route dans l'ordre
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
     MonPremierComponent, //je l ai importé en haut
-    AppareilComponent, AuthComponent, AppareilViewComponent   //je l ai importé en haut
+    AppareilComponent, AuthComponent, AppareilViewComponent, SingleAppareilComponent, FourOhFourComponent   //je l ai importé en haut
   ],
   imports: [
     BrowserModule,
@@ -31,9 +37,10 @@ const appRoutes: Routes=[
     FormsModule,
     RouterModule.forRoot(appRoutes) //pour les routes
   ],
-  providers: [
+  providers: [//y mettre les services
     AppareilService, //je l ai importé en haut
-    AuthService //je l ai importé en haut
+    AuthService, //je l ai importé en haut
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })
