@@ -19,6 +19,7 @@ import { EditAppareilComponent } from './edit-appareil/edit-appareil.component';
 import { UserListComponent } from './user-list/user-list.component';
 import { UserService } from './services/user.service';
 import { NewUserComponent } from './new-user/new-user.component';
+import { HttpClientModule } from '@angular/common/http'
 const appRoutes: Routes=[
   { path: 'appareils', canActivate: [AuthGuard] ,component: AppareilViewComponent }, //canActivate: [AuthGuard] permet de proteger la route ne pas oublier de le mettre dans les provider le chercher dans les services
   { path: 'appareils/:id', canActivate: [AuthGuard], component: SingleAppareilComponent},
@@ -43,7 +44,8 @@ const appRoutes: Routes=[
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,//a ajouter
-    RouterModule.forRoot(appRoutes) //pour les routes
+    RouterModule.forRoot(appRoutes), //pour les routes
+    HttpClientModule,//pour les requettes http
   ],
   providers: [//y mettre les services
     AppareilService, //je l ai importé en haut

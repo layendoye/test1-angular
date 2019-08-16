@@ -40,7 +40,7 @@ export class NewUserComponent implements OnInit {
     this.router.navigate(['/users']);
   }
   getHobbies(){//pour des questions de typage nous creons cette methode qui permet de retourner la form array hobbies sous form de form array
-    return this.userForm.get('hobbies') as FormArray;//get('hobbies')pour recuprer le controle lui même
+    return this.userForm.get('hobbies') as FormArray;//get('hobbies') pour recuprer le controle lui même
   }
   onAddHobby(){
     const newHobbyControl=this.formBuilder.control('',Validators.required);//on cree un nouvel input

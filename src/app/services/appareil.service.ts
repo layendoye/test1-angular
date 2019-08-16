@@ -1,25 +1,12 @@
 import { Subject } from 'rxjs';
-
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+@Injectable()
 export class AppareilService{
     
     appareilSubject= new Subject<any[]>();//le subject emmettra la liste des appareils lorsqu on lui demandera, <any[]> veut dire qu il va retourner un tableau de type any (string, int...)
-    private appareils=[//pour ne pas manipuler les données directement
-    {
-      id:1,
-      name:"Machine à laver",
-      status: "allumé"
-    },
-    {
-      id:2,
-      name:"Télévision",
-      status: "éteint"
-    },
-    {
-      id:3,
-      name:"Ordinateur",
-      status: "allumé"
-    }
-  ];
+    private appareils=[];
+  constructor(private httpClient: HttpClient){}
   emitAppareilSubject(){
     this.appareilSubject.next(this.appareils.slice());//la methode next force le subject à emmetre ce qu on lui passe en argument et la methode this.appareils.slice() donne une cope de la liste des appareil
   }
@@ -62,5 +49,30 @@ export class AppareilService{
     appareilObject.id=this.appareils[(this.appareils.length - 1)].id+1;
     this.appareils.push(appareilObject);
     this.emitAppareilSubject();
+  }
+  saveAppareilsToServer(){
+    this.httpClient
+      .put('https://http-client-demo-b46a7.firebaseio.com/appareils.json',this.appareils)
+      .subscribe(
+        ()=>{
+          console.log('Enregistrement terminé');
+        },
+        (error)=>{
+          console.log('Erreur de sauvegarde ! '+error);
+        }
+      );
+  }
+  getAppareilsFromServer(){
+    this.httpClient
+      .get<any[]>('https://http-client-demo-b46a7.firebaseio.com/appareils.json')
+      .subscribe(
+        (response)=>{
+          this.appareils=response;
+          this.emitAppareilSubject();
+        },
+        (error)=>{
+          console.log('Erreur de chargement ! '+error);
+        }
+      );
   }
 }
